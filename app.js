@@ -6,17 +6,23 @@ app.controller('MainCtrl', [
 		$scope.title= 'Carl\'s List';
 
 		$scope.foodlist = [
-		  { name: 'chicken', price: 0, amount: 1 },
-  		  { name: 'lentils', price: 0, amount: 1},
-		  { name: 'cheese', price: 0, amount: 1},
-		  { name: 'bread', price: 0, amount: 1}, 
-		  { name: 'sauce', price: 0, amount: 1}
+		  { name: 'chicken', price: 0, amount: 1, unit: "lbs"},
+  		  { name: 'lentils', price: 0, amount: 1, unit: "lbs"},
+		  { name: 'cheese', price: 0, amount: 1, unit: "lbs"},
+		  { name: 'bread', price: 0, amount: 1, unit: "ea"}, 
+		  { name: 'sauce', price: 0, amount: 1, unit: "ea"}
 		];
+
+		$scope.hiddenItems = [];
 
 		$scope.addToList = function(){
 			if(!$scope.name || $scope.name === ''){ return; }
 
-			$scope.foodlist.push({ name: $scope.name, price: 0, amount: $scope.amount });
+			if(!$scope.price){ $scope.price = 0 };
+
+			$scope.foodlist.push({ name: $scope.name, price: $scope.price, amount: $scope.amount });
+
+			$scope.amount = '';
 			$scope.name = '';
 			$scope.price = '';
 		};
@@ -37,6 +43,11 @@ app.controller('MainCtrl', [
 			food.name = newName;
 		}
 
+		$scope.updateUnits = function(food, unit){
+			var newUnit = prompt("unit: ");
+			food.unit = newUnit;
+		}
+
 
 		$scope.listTotal = function(){
 			var list = $scope.foodlist;
@@ -47,6 +58,11 @@ app.controller('MainCtrl', [
 
 			return sum;
 		}
+
+		$scope.hideItem = function(item){
+			var toHide = $scope.foodlist.splice($scope.foodlist.indexOf(item), 1);
+			$scope.hiddenItems.push(toHide);
+		};
 
 		$scope.addPriceToFood = function(food, price){
 			food.price = price;
