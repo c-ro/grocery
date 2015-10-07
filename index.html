@@ -80,14 +80,15 @@
                       <th>sub</th>
                       <th>(X)</th>
                     </tr>
-                    <tr ng-repeat="food in foodlist | orderBy:'-price'">
-                      <td ng-click="crossout(food)" ng-class="{crossout: food.crossout}"><h1>&#10004</h1></td>
-                      <td ng-dblclick="updateName(food)" ng-class="{crossoutname: food.crossout}" id="food-name-col">{{food.name}}</td>
-                      <td ng-click="updateAmount(food)" ng-class="{crossout: food.crossout}">{{food.amount}}</td>
-                      <td ng-click="updateUnit(food)" ng-class="{crossout: food.crossout}">{{food.unit}}</td>
-                      <td ng-click="updatePrice(food)" ng-class="{crossout: food.crossout}">{{food.price}}</td>
-                      <td ng-class="{crossout: food.crossout}">{{(food.price * food.amount).toFixed(2)}}</td>
-                      <td ng-click="hideItem(item)" ng-class="{crossout: food.crossout}"><h1>&#8615</h1></td>
+
+                    <tr ng-repeat="item in itemlist | orderBy:'-price'">
+                      <td ng-click="crossout(item)" ng-class="{crossout: item.crossout}"><h1>&#10004</h1></td>
+                      <td ng-dblclick="updateName(item)" ng-class="{crossoutname: item.crossout}" id="item-name-col">{{item.name}}</td>
+                      <td ng-click="updateAmount(item)" ng-class="{crossout: item.crossout}">{{item.amount}}</td>
+                      <td ng-click="updateUnit(item)" ng-class="{crossout: item.crossout}">{{item.unit}}</td>
+                      <td ng-click="updatePrice(item)" ng-class="{crossout: item.crossout}">{{item.price}}</td>
+                      <td ng-class="{crossout: item.crossout}">{{(item.price * item.amount).toFixed(2)}}</td>
+                      <td ng-click="hideItem(item)" ng-class="{crossout: item.crossout}"><h1>&#8615</h1></td>
                     </tr>
                     <tr>
                       <td colspan="5" id="total">total:</td>
@@ -95,7 +96,9 @@
                     </tr>
                 </table>
  <hr>
+
 <!-- LIST INPUT AREA -->
+
                 <div class="container">                
                     <form ng-submit="addToList()">
                         <div id="form-container">
@@ -103,18 +106,13 @@
                               <input type-"text" ng-model="name" id="name-input" placeholder="  new item"></input><br>  
                               <input type-"text" ng-model="amount" id="amount-input" placeholder="  quantity"></input><br>
                               
+                            <!-- UNIT SELECT BUTTONS -->
                               <div class="btn-group-justified" data-toggle="buttons">
-                              <label class="btn btn-units active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked>  ct.
-                              </label>
-                              <label class="btn btn-units">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> lbs
-                              </label>
-                              <label class="btn btn-units">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> oz.
-                              </label>
+                                <label name="unitselect" class="btn btn-units" ng-model="unit" value="ct" btn-radio="'Left'"> ct.</label>
+                                <label name="unitselect" class="btn btn-units" ng-model="unit" value="lbs" btn-radio="'Middle'"> lbs</label>
+                                <label name="unitselect" class="btn btn-units" ng-model="unit" value ="ox" btn-radio="'Right'"> oz.</label>
                              </div>
-                             
+
                               <input type-"text" ng-model="price" id="price-input" placeholder="  price"></input><br>
 
                               <!-- <input type-"text" ng-model="unit" id="unit-input" placeholder="  unit"></input> -->
