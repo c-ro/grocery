@@ -75,7 +75,7 @@
                       <th>?</th>
                       <th>name</th>
                       <th>qty</th>
-                      <th>unit</th>
+                      <th>units</th>
                       <th>price</th>
                       <th>sub</th>
                       <th>(X)</th>
@@ -85,7 +85,7 @@
                       <td ng-click="crossout(item)" ng-class="{crossout: item.crossout}"><h1>&#10004</h1></td>
                       <td ng-dblclick="updateName(item)" ng-class="{crossoutname: item.crossout}" id="item-name-col">{{item.name}}</td>
                       <td ng-click="updateAmount(item)" ng-class="{crossout: item.crossout}">{{item.amount}}</td>
-                      <td ng-click="updateUnit(item)" ng-class="{crossout: item.crossout}">{{item.unit}}</td>
+                      <td ng-click="updateUnits(item)" ng-class="{crossout: item.crossout}">{{item.units}}</td>
                       <td ng-click="updatePrice(item)" ng-class="{crossout: item.crossout}">{{item.price}}</td>
                       <td ng-class="{crossout: item.crossout}">{{(item.price * item.amount).toFixed(2)}}</td>
                       <td ng-click="hideItem(item)" ng-class="{crossout: item.crossout}"><h1>&#8615</h1></td>
@@ -93,6 +93,7 @@
                     <tr>
                       <td colspan="5" id="total">total:</td>
                       <td>${{listTotal().toFixed(2)}}</td>
+                      <td ng-click="viewHidden()">&#128194</td>
                     </tr>
                 </table>
  <hr>
@@ -103,19 +104,29 @@
                     <form ng-submit="addToList()">
                         <div id="form-container">
                             <div id="inputs-container">
+                              <tt>{{amount || 0}} @ ${{price || 0}} per {{units}}</tt>
                               <input type-"text" ng-model="name" id="name-input" placeholder="  new item"></input><br>  
                               <input type-"text" ng-model="amount" id="amount-input" placeholder="  quantity"></input><br>
                               
-                            <!-- UNIT SELECT BUTTONS -->
-                              <div class="btn-group-justified" data-toggle="buttons">
-                                <label name="unitselect" class="btn btn-units" ng-model="unit" value="ct" btn-radio="'Left'"> ct.</label>
-                                <label name="unitselect" class="btn btn-units" ng-model="unit" value="lbs" btn-radio="'Middle'"> lbs</label>
-                                <label name="unitselect" class="btn btn-units" ng-model="unit" value ="ox" btn-radio="'Right'"> oz.</label>
-                             </div>
+                                <!-- units SELECT BUTTONS -->
+                                <div class="btn-group-justified">
+                                  
+                                  <label class="btn btn-units" for="ct">
+                                    <input ng-model="units" name="unitselect" id="ct" type="radio" value="ct" checked="">  ct.
+                                  </label>
+                                  <label class="btn btn-units" for="lb">
+                                    <input ng-model="units" name="unitselect" id="lb" type="radio" value="lb">  lbs
+                                  </label>
+
+                                  <label class="btn btn-units" for="oz">
+                                    <input ng-model="units" name="unitselect" id="oz" type="radio" value="oz">  oz.
+                                  </label>
+
+                               </div>
 
                               <input type-"text" ng-model="price" id="price-input" placeholder="  price"></input><br>
 
-                              <!-- <input type-"text" ng-model="unit" id="unit-input" placeholder="  unit"></input> -->
+                              <!-- <input type-"text" ng-model="units" id="units-input" placeholder="  units"></input> -->
 
                             </div>
                             <div id="button-container">

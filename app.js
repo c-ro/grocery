@@ -1,17 +1,17 @@
 var app = angular.module('grocer', []);
 
 app.factory('items', [function(){
-	var o = {
+	var list = {
 		items: [
-		  { name: 'chicken', price: 0, amount: 1, unit: 'lbs'},
-  		  { name: 'lentils', price: 0, amount: 1, unit: 'lbs'},
-		  { name: 'cheese', price: 0, amount: 1, unit: 'lbs'},
-		  { name: 'bread', price: 0, amount: 1, unit: 'ea'}, 
-		  { name: 'sauce', price: 0, amount: 1, unit: 'ea'}
+		  { name: 'chicken', price: 0, amount: 1, units: 'lbs'},
+  		  { name: 'lentils', price: 0, amount: 1, units: 'lbs'},
+		  { name: 'cheese', price: 0, amount: 1, units: 'lbs'},
+		  { name: 'bread', price: 0, amount: 1, units: 'ea'}, 
+		  { name: 'sauce', price: 0, amount: 1, units: 'ea'}
 		]
 	};
 
-	return o;
+	return list;
 
 }])
 
@@ -26,22 +26,17 @@ app.controller('MainCtrl', [
 
 		$scope.hiddenItems = [];
 
-		$scope.units = "ct";
-
 		$scope.addToList = function(){
 			if(!$scope.name || $scope.name === ''){ return; }
 
 			if(!$scope.price){ $scope.price = 0 };
 
-			console.log($scope.unit);
-			console.log($scope.name);
-
-			$scope.itemlist.push({ name: $scope.name, price: $scope.price, amount: $scope.amount, unit: $scope.unit} );
+			$scope.itemlist.push({ name: $scope.name, price: $scope.price, amount: $scope.amount, units: $scope.units} );
 
 			$scope.amount = '';
 			$scope.name = '';
 			$scope.price = '';
-			$scope.unit = '';
+			$scope.units = '';
 		};
 
 		$scope.updateAmount = function(item, amount){
@@ -60,11 +55,10 @@ app.controller('MainCtrl', [
 			item.name = newName;
 		}
 
-		$scope.updateUnit = function(item, unit){
-			var newUnit = prompt("unit: ");
-			item.unit = newUnit;
+		$scope.updateUnits = function(item, units){
+			var newunits = prompt("units: ");
+			item.units = newunits;
 		}
-
 
 		$scope.listTotal = function(){
 			var list = $scope.itemlist;

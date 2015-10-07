@@ -507,6 +507,7 @@ td {
 #inputs-container { 
     float: left;
     margin: auto;
+    max-width: 166px;
 }
 
 /* add button */
@@ -518,10 +519,6 @@ td {
     padding: 5px;
     width: 75px;
     height: 75px;
-}
-
-.btn-group-justified{
-    width: 166px;
 }
 
 .btn-units {
@@ -552,4 +549,8 @@ td {
   background-image: linear-gradient(to bottom, #d6d6d6, #999799);
   text-decoration: none;
   text-transform: lowercase;
+}
+
+.btn-units input[type="radio"] {
+    display: none;
 }
